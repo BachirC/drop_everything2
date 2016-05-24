@@ -1,0 +1,11 @@
+{
+  "name": "dropeverything!",
+  "version": "2.0.0",
+  "description": "A slackbot to remind you to do your duty !",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bachir",
+  "license": "ISC"
+}
