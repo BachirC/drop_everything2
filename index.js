@@ -11,6 +11,7 @@ router.use(function(req, res, next) {
 
 router.post('/pull_request', function(req, res) {
   console.log('Pull request received');
+  res.send('Received!');
 });
 
 router.get('/', function(req, res) {
