@@ -38,7 +38,8 @@ app.use('/', router);
 var opening_params = function(body) {
   var params = {
     description: body.pull_request.body,
-    url: body.pull_request.html_url
+    url: body.pull_request.html_url,
+    repo: body.repository.name
   };
   return params;
 };
@@ -46,7 +47,7 @@ var opening_params = function(body) {
 // Handlers for the different actions on pull requests (opened, edited, closed, synchronize, reopened)
 var opening_handler = function(body) {
   params = opening_params(body);
-  console.log('You have opened a new PR at url : ' + params['url'] + ' with the description : ' + params['description']);
+  console.log('You have opened a new PR on the repo ' + params['repo'] + ' at url : ' + params['url'] + ' with the description : ' + params['description']);
 };
 
 var editing_handler = function(body) {
