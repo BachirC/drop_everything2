@@ -6,7 +6,7 @@ var router = express.Router();
 var EventHandler = require('./models/event_handler');
 var eventHandler = new EventHandler();
 
-app.use( bodyParser.json() );
+app.use(bodyParser.json());
 
 router.use(function(req, res, next) {
   // log each request to the console
@@ -14,7 +14,7 @@ router.use(function(req, res, next) {
   next();
 });
 
-// Main route. Gets all the data from github webhook
+// Gets all the data from github pull_request webhook
 router.post('/pull_request', function(req, res) {
   action = req.body.action;
   if (EventHandler.validateActionType(action)) {
