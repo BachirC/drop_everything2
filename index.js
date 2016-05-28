@@ -16,6 +16,7 @@ router.use(function(req, res, next) {
 
 // Gets all the data from github pull_request webhook
 router.post('/pull_request', function(req, res) {
+  console.log('header : ' + req.get('X-GitHub-Event'));
   action = req.body.action;
   if (EventHandler.validateActionType(action)) {
     eventHandler[action]();
