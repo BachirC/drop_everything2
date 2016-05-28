@@ -3,8 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var port = process.env.PORT || 5000;
 var router = express.Router();
-var EventHandler = require('./models/event_handler');
-var eventHandler = new EventHandler();
+var WebhookValidator = require('./models/webhook_validator');
 
 app.use(bodyParser.json());
 
@@ -16,15 +15,16 @@ router.use(function(req, res, next) {
 
 // Gets all the data from github pull_request webhook
 router.post('/pull_request', function(req, res) {
-  console.log('header : ' + req.get('X-GitHub-Event'));
-  action = req.body.action;
-  if (EventHandler.validateActionType(action)) {
-    eventHandler[action]();
-    res.send('Received!');
+  webhook = req.get('X-GitHub-Event');
+  if (WebhookHandler = WebhookValidator.validateWebhook(webhook)) {
+    action = req.body.action;
+    WebhookValidator.instantiateHandler(webhook, req.body);
+    res.status(200).end();
   }
   else {
-    res.send('Unknown action : ' + action);
-  };
+    res.status(400).send('Webhook "' + webhook + '" unknown');
+  }
+  action = req.body.action;
 });
 
 router.get('/', function(req, res) {
@@ -42,7 +42,6 @@ var openingParams = function(body) {
   return params;
 };
 
-// Handlers for the different actions on pull requests (opened, edited, closed, synchronize, reopened)
 app.listen(port, function() {
   console.log('Listening on ' + port);
 });
