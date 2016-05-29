@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var port = process.env.PORT || 5000;
 var router = express.Router();
 var WebhookValidator = require('./models/webhook_validator');
+var SlackBot = require('./client/slackbot.js');
 
 app.use(bodyParser.json());
 
@@ -21,11 +22,14 @@ router.post('/pull_request', function(req, res) {
 
   if (webhookValidator.validateWebhook()) {
     handler = webhookValidator.instantiateHandler();
-    if (webhookValidator.validateAction(handler)) {
-      res.status(200).end();
+    if (handler.validateAction()) {
+      info = handler.sendInfo();
+      var bot = new SlackBot();
+      bot.sendMessage();
+      res.status(200).send(info);
     }
     else {
-      res.status(400).send('Invalid Action');
+      res.status(400).send('Invalid Action "' + action + '"');
     };
   }
   else {
