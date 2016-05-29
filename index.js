@@ -24,7 +24,7 @@ router.post('/pull_request', function(req, res) {
     handler = webhookValidator.instantiateHandler();
     if (handler.validateAction()) {
       info = handler.sendInfo();
-      var bot = new SlackBot();
+      var bot = new SlackBot(info);
       bot.sendMessage();
       res.status(200).send(info);
     }

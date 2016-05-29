@@ -14,8 +14,19 @@ SlackBot.prototype.sendMessage = function () {
     users.forEach(function (userId) {
       slack.im.open({ 'token' : botToken, 'user' : userId }, function (err, data) {
         if (err) return console.log(err);
-        //slack.chat.postMessage({ 'token' : botToken, 'channel' : data['channel']['id'], 'text' : 'yo' }, function(err, data) {
-       // });
+
+        msg = MessageBuilder.build(info);
+        slack.chat.postMessage({
+          'token' : botToken,
+          'username' : 'DEv2',
+          'channel' : data['channel']['id'],
+          'as_user' : false,
+          'icon_emoji' : ':dab:',
+          'text' : msg['text'],
+          'attachments' : JSON.stringify(msg['attachments'])
+        }, function(err, data) {
+          if (err) return console.log(err);
+        });
       });
     });
   });
