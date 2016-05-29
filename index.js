@@ -16,15 +16,21 @@ router.use(function(req, res, next) {
 // Gets all the data from github pull_request webhook
 router.post('/pull_request', function(req, res) {
   webhook = req.get('X-GitHub-Event');
-  if (WebhookHandler = WebhookValidator.validateWebhook(webhook)) {
-    action = req.body.action;
-    WebhookValidator.instantiateHandler(webhook, req.body);
-    res.status(200).end();
+  action = req.body.action;
+  webhookValidator = new WebhookValidator(webhook, action, req.body);
+
+  if (webhookValidator.validateWebhook()) {
+    handler = webhookValidator.instantiateHandler();
+    if (webhookValidator.validateAction(handler)) {
+      res.status(200).end();
+    }
+    else {
+      res.status(400).send('Invalid Action');
+    };
   }
   else {
     res.status(400).send('Webhook "' + webhook + '" unknown');
-  }
-  action = req.body.action;
+  };
 });
 
 router.get('/', function(req, res) {
