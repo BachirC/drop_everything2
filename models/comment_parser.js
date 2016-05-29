@@ -14,14 +14,14 @@ CommentParser.extractUsernames = function (comment) {
 
     res.push(ele.substr(1));
   });
-  return git_to_slack(res);
+  return res;
 };
 
 CommentParser.diffArrays = function (a1, a2) {
   return _.difference(a1, a2);
 };
 
-var git_to_slack = function(git_usernames) {
+CommentParser.git_to_slack = function (git_usernames) {
   res = [];
   git_usernames.forEach(function (ele) {
     if (!(ele in users_mapping)) 

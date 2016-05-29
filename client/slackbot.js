@@ -8,7 +8,7 @@ var SlackBot = function(info) {
 SlackBot.prototype.sendMessage = function () {
   slack.users.list({ 'token' : botToken }, function (err, data) {
     if (err) return console.log(err);
-    users = _.reject(data['members'], function (e) { return info['pr_assignee'].indexOf(e['name']) === -1 })
+    users = _.reject(data['members'], function (e) { return info['recipients'].indexOf(e['name']) === -1 })
              .map(function (e) { return e['id'] });
 
     users.forEach(function (userId) {
