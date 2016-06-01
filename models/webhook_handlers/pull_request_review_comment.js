@@ -30,7 +30,7 @@ var extractInfo = function (data) {
       'com_author' : data['comment']['user']['login'],
       'com_url' : data['comment']['html_url'],
       'com_body' : data['comment']['body'],
-      'diff_hunk' : diff_hunk.slice(diff_hunk.indexOf('\n')).trim(1)
+      'diff_hunk' : diff_hunk
   };
 };
 
