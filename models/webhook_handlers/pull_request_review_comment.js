@@ -5,6 +5,7 @@ const PR_REVIEW_COM_TYPE = 'pull_request_review_comment';
 
 var Parser = require('../../models/comment_parser.js');
 
+//Extract info from pull_request_review_comment webhook
 class PRReviewComment {
 
   constructor (data, action) {
