@@ -38,7 +38,7 @@ var getAssignee = function (data) {
       return Parser.extractUsernames(diff);
       break;
     default:
-      return Parser.git_to_slack(Parser.extractUsernames(data['pull_request']['body']));
+      return Parser.gitToSlack(Parser.extractUsernames(data['pull_request']['body']));
   };
 };
 module.exports = PullRequest;

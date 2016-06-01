@@ -1,6 +1,7 @@
 var _ = require('underscore');
 var slack = require('slack');
-var botToken = 'xoxb-46619630689-OWDwtjPR3pXlVynZsoHnsjW1';
+var botToken = process.env.BOT_TOKEN;
+var MessageBuilder = require('../models/message_builder');
 var SlackBot = function(info) {
   this.info = info;
 };

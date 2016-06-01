@@ -21,7 +21,7 @@ CommentParser.diffArrays = function (a1, a2) {
   return _.difference(a1, a2);
 };
 
-CommentParser.git_to_slack = function (git_usernames) {
+CommentParser.gitToSlack = function (git_usernames) {
   res = [];
   git_usernames.forEach(function (ele) {
     if (!(ele in users_mapping)) 

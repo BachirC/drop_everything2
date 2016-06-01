@@ -29,12 +29,12 @@ MessageBuilder.build = function (info) {
 
 var prDiffComMessage = function (action) {
   return {
-    'text' : 'New diff comment on your PR !',
+    'text' : '*New diff comment on your PR !*',
     'attachments' : [
       {
-        'text' : 'Comment : ' + info['com_body'],
+        'text' : '`' + info['diff_hunk'] + '`\n' +  '*@' + info['com_author'] + '* :  _' + info['com_body'] + '_',
         'color' : COLORS[action],
-        'author_name' : info['com_author'],
+        'mrkdwn_in' : ['text'],
         'footer' : info['repo'],
         'title' : 'Go to diff comment',
         'title_link' : info['com_url'],
