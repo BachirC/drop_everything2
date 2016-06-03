@@ -9,14 +9,14 @@ var SlackBot = require('./client/slackbot.js');
 
 app.use(bodyParser.json());
 
-router.use(function(req, res, next) {
+router.use((req, res, next) => {
   // log each request to the console
   console.log('Request : ' +  req.method, req.url);
   next();
 });
 
 // Gets all the data from github pull_request webhook
-router.post('/pull_request', function(req, res) {
+router.post('/pull_request', (req, res) => {
   webhook = req.get('X-GitHub-Event');
   action = req.body.action;
   webhookValidator = new WebhookValidator(webhook, action, req.body);
@@ -38,21 +38,12 @@ router.post('/pull_request', function(req, res) {
   };
 });
 
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
   res.send('Nothing to see here :p');
 });
 
 app.use('/', router);
 
-var openingParams = function(body) {
-  var params = {
-    description: body.pull_request.body,
-    url: body.pull_request.html_url,
-    repo: body.repository.name
-  };
-  return params;
-};
-
-app.listen(port, function() {
+app.listen(port, () => {
   console.log('Listening on ' + port);
 });

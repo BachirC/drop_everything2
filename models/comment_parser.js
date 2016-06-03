@@ -1,35 +1,38 @@
+'use strict';
 var _ = require('underscore');
 var users_mapping = require('../users_mapping.json');
 
-var CommentParser = function() {};
+class CommentParser {
 
-CommentParser.extractUsernames = function (comment) {
-  res = [];
-  if (typeof comment === undefined)
-    return res;
+  static extractUsernames (comment) {
+    var res = [];
+    if (typeof comment === undefined)
+      return res;
 
-  comment.split(" ").forEach(function (ele) {
-    if (ele[0] !== '@')
+    comment.split(" ").forEach(ele => {
+      if (ele[0] !== '@')
       return;
 
     res.push(ele.substr(1));
-  });
-  return res;
-};
+    });
+    return res;
+  };
 
-CommentParser.diffArrays = function (a1, a2) {
-  return _.difference(a1, a2);
-};
+  static diffArrays (a1, a2) {
+    return _.difference(a1, a2);
+  };
 
-CommentParser.gitToSlack = function (git_usernames) {
-  res = [];
-  git_usernames.forEach(function (ele) {
-    if (!(ele in users_mapping)) 
+  static gitToSlack (git_usernames) {
+    var res = [];
+
+    git_usernames.forEach(ele => {
+      if (!(ele in users_mapping)) 
       return;
     res.push(users_mapping[ele]);
-  });
+    });
 
-  return res;
-};
+    return res;
+  };
+}
 
 module.exports = CommentParser;

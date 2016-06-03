@@ -38,5 +38,4 @@ class PRReviewComment {
   }
 }
 
-
 module.exports = PRReviewComment;
