@@ -29,7 +29,7 @@ class PRReviewComment {
       'pr_title'   : data['pull_request']['title'],
       'pr_url'     : data['pull_request']['html_url'],
       'pr_owner'   : data['sender']['login'],
-      'recipients' : Parser.gitToSlack([data['pull_request']['user']['login'].substr(1)]),
+      'recipients' : Parser.gitToSlack([data['pull_request']['user']['login']]),
       'com_author' : data['comment']['user']['login'],
       'com_url'    : data['comment']['html_url'],
       'com_body'   : data['comment']['body'],

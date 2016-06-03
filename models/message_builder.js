@@ -31,7 +31,7 @@ class MessageBuilder {
   prDiffComMessage (action) {
     return {
       'text' : 'New Review Comment on your PR !',
-        'attachments' : [
+      'attachments' : [
         {
           'text' : '```' + info['diff_hunk'] + '```\n' +  '*@' + info['com_author'] + '* :  _' + info['com_body'] + '_',
           'color' : COLORS[action],

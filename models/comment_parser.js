@@ -26,7 +26,7 @@ class CommentParser {
     var res = [];
 
     git_usernames.forEach(ele => {
-      if (!(ele in users_mapping)) 
+      if (!(ele in users_mapping))
       return;
     res.push(users_mapping[ele]);
     });
