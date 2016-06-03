@@ -19,6 +19,7 @@ router.use((req, res, next) => {
 router.post('/pull_request', (req, res) => {
   webhook = req.get('X-GitHub-Event');
   action = req.body.action;
+  console.log('Info : %j', req.body);
   webhookValidator = new WebhookValidator(webhook, action, req.body);
 
   if (webhookValidator.validateWebhook()) {
