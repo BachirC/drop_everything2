@@ -5,8 +5,8 @@ const SYNC_ACTION = 'synchronize';
 const CREATED_ACTION = 'created';
 const PR_TYPE = 'pull_request';
 const PR_REVIEW_COM_TYPE = 'pull_request_review_comment';
-const ISSUE_TYPE = 'issue';
-const TYPES = [PR_TYPE, PR_REVIEW_COM_TYPE, ISSUE_TYPE];
+const ISSUES_TYPE = 'issues';
+const TYPES = [PR_TYPE, PR_REVIEW_COM_TYPE, ISSUES_TYPE];
 const LOGO_URL = 'https://s3-eu-west-1.amazonaws.com/fa-assets/fa-logo-red.png';
 const COLORS = {
   OPENED_ACTION : '#2A363B',
@@ -23,12 +23,31 @@ class MessageBuilder {
         return this.prMessage(info['action']);
         break;
       case PR_REVIEW_COM_TYPE:
-        return this.prDiffComMessage(info['action']);
+        return this.prDiffComMessage();
+        break;
+      case ISSUES_TYPE:
+        return this.issuesMessage();
         break;
     };
   }
 
-  prDiffComMessage (action) {
+  issuesMessage () {
+    return {
+      'text' : 'Check out this Issue !',
+      'attachments' : [
+        {
+          'color' : COLORS[action],
+          'author_name' : info['issue_github_owner'],
+          'footer' : info['repo'],
+          'title' : info['issue_title'],
+          'title_link' : info['issue_url'],
+          'footer_icon' : LOGO_URL
+        }
+      ]
+    }
+  }
+
+  prDiffComMessage () {
     return {
       'text' : 'New Review Comment on your PR !',
       'attachments' : [
