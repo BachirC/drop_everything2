@@ -11,9 +11,9 @@ class CommentParser {
 
     comment.split(" ").forEach(ele => {
       if (ele[0] !== '@')
-      return;
+        return;
 
-    res.push(ele.substr(1));
+      res.push(ele.substr(1));
     });
     return res;
   };
@@ -27,8 +27,9 @@ class CommentParser {
 
     git_usernames.forEach(ele => {
       if (!(ele in users_mapping))
-      return;
-    res.push(users_mapping[ele]);
+        return;
+
+      res.push(users_mapping[ele]);
     });
 
     return res;
