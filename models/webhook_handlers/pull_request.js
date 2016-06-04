@@ -15,21 +15,22 @@ class PullRequest {
   }
 
   sendInfo () {
-    return this.extractInfo(this.data);
+    return this.extractInfo();
   }
 
   validateAction () {
     return (ALLOWED_ACTIONS.indexOf(this.action) !== -1);
   }
 
-  extractInfo (data) {
+  extractInfo () {
+    var data = this.data;
     return {
-      'action' : this.action,
-      'type' : PR_TYPE,
-      'repo' : data['repository']['name'],
-      'pr_title' : data['pull_request']['title'],
-      'pr_url' : data['pull_request']['html_url'],
-      'recipients' : this.getAssignee(data),
+      'action'          : action,
+      'type'            : PR_TYPE,
+      'repo'            : data['repository']['name'],
+      'pr_title'        : data['pull_request']['title'],
+      'pr_url'          : data['pull_request']['html_url'],
+      'recipients'      : this.getAssignee(data),
       'pr_github_owner' : data['pull_request']['user']['login']
     };
   }

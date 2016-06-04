@@ -3,6 +3,7 @@ const CREATED_ACTION = 'created';
 const ALLOWED_ACTIONS = [CREATED_ACTION];
 const PR_REVIEW_COM_TYPE = 'pull_request_review_comment';
 
+var _ = require('underscore');
 var Parser = require('../../models/comment_parser.js');
 
 //Extract info from pull_request_review_comment webhook
@@ -14,7 +15,8 @@ class PRReviewComment {
   }
 
   sendInfo () {
-    return this.extractInfo(this.data);
+    var info = this.extractInfo(this.data);
+    if (!(_.isEqual(info['recipients'], Parser.gitToSlack([info['pr_owner']])))) return info;
   }
 
   validateAction () {
