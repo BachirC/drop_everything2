@@ -31,7 +31,8 @@ class PullRequest {
       'pr_title'        : data['pull_request']['title'],
       'pr_url'          : data['pull_request']['html_url'],
       'recipients'      : this.getAssignee(data),
-      'pr_github_owner' : data['pull_request']['user']['login']
+      'pr_github_owner' : data['pull_request']['user']['login'],
+      'author_url'      : data['pull_request']['user']['avatar_url']
     };
   }
 

@@ -24,12 +24,12 @@ class Issues {
   extractInfo () {
     var data = this.data;
     return {
-      'action'          : action,
-      'type'            : ISSUES_TYPE,
-      'repo'            : data['repository']['name'],
+      'action'             : action,
+      'type'               : ISSUES_TYPE,
+      'repo'               : data['repository']['name'],
       'issue_title'        : data['issue']['title'],
       'issue_url'          : data['issue']['html_url'],
-      'recipients'      : this.getAssignee(data),
+      'recipients'         : this.getAssignee(data),
       'issue_github_owner' : data['issue']['user']['login']
     };
   }
