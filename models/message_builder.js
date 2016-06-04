@@ -59,6 +59,7 @@ class MessageBuilder {
         {
           'color' : COLORS[action],
           'author_name' : info['issue_github_owner'],
+          'author_icon' : info['author_avatar'],
           'footer' : info['repo'],
           'title' : info['issue_title'],
           'title_link' : info['issue_url'],
@@ -92,7 +93,7 @@ class MessageBuilder {
         {
           'color' : COLORS[action],
           'author_name' : info['pr_github_owner'],
-          'author_icon' : info['author_url'],
+          'author_icon' : info['author_avatar'],
           'footer' : info['repo'],
           'title' : info['pr_title'],
           'title_link' : info['pr_url'],

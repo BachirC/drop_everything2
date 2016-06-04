@@ -30,7 +30,8 @@ class Issues {
       'issue_title'        : data['issue']['title'],
       'issue_url'          : data['issue']['html_url'],
       'recipients'         : this.getAssignee(data),
-      'issue_github_owner' : data['issue']['user']['login']
+      'issue_github_owner' : data['issue']['user']['login'],
+      'author_avatar'      : data['issue']['user']['avatar_url']
     };
   }
 
