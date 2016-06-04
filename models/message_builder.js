@@ -6,7 +6,8 @@ const CREATED_ACTION = 'created';
 const PR_TYPE = 'pull_request';
 const PR_REVIEW_COM_TYPE = 'pull_request_review_comment';
 const ISSUES_TYPE = 'issues';
-const TYPES = [PR_TYPE, PR_REVIEW_COM_TYPE, ISSUES_TYPE];
+const ISSUE_COM_TYPE = 'issue_comment';
+const TYPES = [PR_TYPE, PR_REVIEW_COM_TYPE, ISSUES_TYPE, ISSUE_COM_TYPE];
 const LOGO_URL = 'https://s3-eu-west-1.amazonaws.com/fa-assets/fa-logo-red.png';
 const COLORS = {
   OPENED_ACTION : '#2A363B',
@@ -28,7 +29,27 @@ class MessageBuilder {
       case ISSUES_TYPE:
         return this.issuesMessage();
         break;
+      case ISSUE_COM_TYPE:
+        return this.issueComMessage();
+        break;
     };
+  }
+
+  issueComMessage () {
+    return {
+      'text' : 'You have been mentioned in an Issue Comment !',
+      'attachments' : [
+        {
+          'text' : '*@' + info['com_author'] + '* :  _' + info['com_body'] + '_',
+          'color' : COLORS[action],
+          'mrkdwn_in' : ['text'],
+          'footer' : info['repo'],
+          'title' : info['issue_title'],
+          'title_link' : info['com_url'],
+          'footer_icon' : LOGO_URL
+        }
+      ]
+    }
   }
 
   issuesMessage () {
@@ -56,7 +77,7 @@ class MessageBuilder {
           'color' : COLORS[action],
           'mrkdwn_in' : ['text'],
           'footer' : info['repo'],
-          'title' : 'View on Github',
+          'title' : info['pr_title'],
           'title_link' : info['com_url'],
           'footer_icon' : LOGO_URL
         }
