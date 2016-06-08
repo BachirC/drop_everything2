@@ -39,8 +39,8 @@ class PullRequest {
   getAssignee (data) {
     switch(this.action) {
       case EDITED_ACTION:
-        diff = Parser.diffArrays(data['pull_request']['body'].split(' '), data['changes']['body']['from'].split(' ')).join(' ');
-        return Parser.extractUsernames(diff);
+        let diff = Parser.diffArrays(data['pull_request']['body'].split(' '), data['changes']['body']['from'].split(' ')).join(' ');
+        return Parser.gitToSlack(Parser.extractUsernames(diff));
         break;
       default:
         return Parser.gitToSlack(Parser.extractUsernames(data['pull_request']['body']));
