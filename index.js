@@ -7,11 +7,19 @@ var router = express.Router();
 var WebhookValidator = require('./models/webhook_validator');
 var SlackBot = require('./client/slackbot.js');
 
+var redis = require("redis"),
+    client = redis.createClient(process.env.REDIS_URL);
+
 app.use(bodyParser.json());
 
 router.use((req, res, next) => {
   // log each request to the console
   console.log('Request : ' +  req.method, req.url);
+  next();
+});
+
+router.use((req, res, next) => {
+  client.set(Date.now(), JSON.stringify(req.body));
   next();
 });
 
