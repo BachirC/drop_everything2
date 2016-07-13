@@ -19,7 +19,9 @@ router.use((req, res, next) => {
 });
 
 router.use((req, res, next) => {
-  client.set(Date.now(), JSON.stringify(req.body));
+  if (process.env.LOG_IN_REDIS) {
+    client.set(Date.now(), JSON.stringify(req.body));
+  }
   next();
 });
 
