@@ -1,0 +1,27 @@
+{
+  "backend": [
+    "aliou",
+    "bachirc",
+    "baicheng",
+    "ook"
+  ],
+  "frontend": [
+    "oleksandr.knyga",
+    "yakiniko"
+  ],
+  "mobile": [
+    "ali",
+    "jjoaquim",
+    "raphael"
+  ],
+  "design": [
+    "arthur",
+    "hugo"
+  ],
+  "specs": [
+    "claire",
+    "linepogl",
+    "antony",
+    "mvall"
+  ]
+}
