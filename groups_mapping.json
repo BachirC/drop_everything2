@@ -23,5 +23,9 @@
     "linepogl",
     "antony",
     "mvall"
+  ],
+  "test_group": [
+    "aliou",
+    "bachirc"
   ]
 }
